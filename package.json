@@ -4,8 +4,9 @@
   "description": "Este é um projeto full-stack utilizando a stack **MERN (MongoDB, Express.js, React.js, Node.js)**. O objetivo é fornecer uma interface web simples para gerenciar produtos, permitindo operações de **criação, leitura, atualização e exclusão (CRUD)**.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon backend/server.js"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mongoose": "^8.14.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
