@@ -8,6 +8,7 @@ function App() {
 
   return (
    
+  
    <Box minH={'100vh'}>
     <Navbar/>
     <Routes>
@@ -16,6 +17,7 @@ function App() {
     </Routes>
    </Box>   
    
+
   )
 }
 
