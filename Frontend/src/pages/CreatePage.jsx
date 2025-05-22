@@ -1,7 +1,16 @@
-import { Container, Typography, Box, Stack, TextField, Button } from '@mui/material';
-import React, { useState } from 'react'
+import {
+  Container,
+  Typography,
+  Box,
+  Stack,
+  TextField,
+  Button,
+  useTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 
 function CreatePage() {
+  const theme = useTheme();
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -10,20 +19,29 @@ function CreatePage() {
   });
 
   const handleAddProduct = () => {
-    console.log('console.log handleAddProduct')
-  }
+    console.log("console.log handleAddProduct");
+  };
 
   return (
-    <Container maxWidth="sm">
-      <Stack spacing={8}>
-        <Typography variant="h4" component="h1" align="center" gutterBottom>
-          Criar novo produto
+    <Container maxWidth="sm" disableGutters>
+      <Stack spacing={5}>
+        <Typography
+          sx={{
+            width: "100%",
+            color: theme.palette.text.primary,
+            fontWeight: "bold",
+            textAlign: "center",
+            fontSize: { xs: 32, sm: 38 },
+            p: 1,
+          }}
+        >
+          Novo Produto
         </Typography>
 
         <Box
           width="100%"
           sx={{
-            bgcolor: '#13002c',
+            bgcolor: theme.palette.background.paper,
             p: 3,
             borderRadius: 2,
             boxShadow: 3,
@@ -35,7 +53,9 @@ function CreatePage() {
               name="name"
               fullWidth
               value={newProduct.name}
-              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, name: e.target.value })
+              }
             />
 
             <TextField
@@ -44,7 +64,9 @@ function CreatePage() {
               type="number"
               fullWidth
               value={newProduct.price}
-              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, price: e.target.value })
+              }
             />
 
             <TextField
@@ -52,7 +74,9 @@ function CreatePage() {
               name="image"
               fullWidth
               value={newProduct.image}
-              onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, image: e.target.value })
+              }
             />
 
             <Button
@@ -68,6 +92,6 @@ function CreatePage() {
       </Stack>
     </Container>
   );
-};
+}
 
-export default CreatePage
+export default CreatePage;

@@ -1,23 +1,32 @@
-import { Box } from '@mui/material'
-import { Route, Routes } from 'react-router-dom'
-import CreatePage from './pages/CreatePage'
-import HomePage from './pages/HomePage'
-import Navbar from './components/Navbar'
-import { CustomThemeProvider } from './contexts/themeContext'
+// App.jsx
+import { ThemeProvider, CssBaseline, Box } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import CreatePage from "./pages/CreatePage";
+import HomePage from "./pages/HomePage";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
+import { lightTheme, darkTheme } from "./theme";
+import "./global.css";
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true); 
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
-    <CustomThemeProvider> 
-      <Box minH={'100vh'} bgcolor={"#13002c"}>
-        <Navbar/>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: "100vh" }}>
+        <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/Create' element={<CreatePage/>}/>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/create" element={<CreatePage />} />
         </Routes>
-      </Box>   
-     </CustomThemeProvider>
-  )
+      </Box>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

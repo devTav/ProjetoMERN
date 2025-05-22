@@ -1,18 +1,18 @@
 import { Container, Typography, Box, Stack, Button } from '@mui/material';
 import { CiSquarePlus } from "react-icons/ci";
-import { MdDarkMode } from "react-icons/md";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-
+const Navbar = ({ toggleTheme, isDarkMode }) => {
   return (
-    <Container maxWidth="lg">
+    <Box width="100%">
       <Box
         display="flex"
         alignItems="center"
         justifyContent="space-between"
         flexDirection={{ xs: 'column', sm: 'row' }}
         height={64}
+        width="100%"
       >
         <Typography
           sx={{
@@ -21,30 +21,33 @@ const Navbar = () => {
             WebkitTextFillColor: 'transparent',
             fontWeight: 'bold',
             textTransform: 'uppercase',
-            textAlign: 'center',
-            fontSize: { xs: 22, sm: 28 },
+            textAlign: 'right',
+            fontSize: { xs: 32, sm: 38 },
+            p: 2
           }}
         >
           <Link to="/" style={{ textDecoration: 'none' }}>
-              Produtos 🛒
+            Produtos 🛒
           </Link>
         </Typography>
-        
-        <Stack spacing={2} alignItems={"center"} direction={'row'}> 
+
+        <Stack spacing={2} alignItems={"center"} direction={'row'} p={2}>
           <Link to="/create" style={{ textDecoration: 'none' }}>
-            <Button>
-              <CiSquarePlus fontSize={20}/> 
-            </Button>  
+            <Button sx={{ color: '#ee0979' }}>
+              <CiSquarePlus fontSize={35} />
+            </Button>
           </Link>
 
-          <Button>
-            <MdDarkMode fontSize={20}/>
+          <Button onClick={toggleTheme} sx={{ color: '#ee0979' }}>
+            {isDarkMode ? (
+              <MdOutlineLightMode fontSize={30} />
+            ) : (
+              <MdOutlineDarkMode fontSize={30} />
+            )}
           </Button>
-
-        </Stack>        
-
+        </Stack>
       </Box>
-    </Container>
+    </Box>
   );
 };
 
