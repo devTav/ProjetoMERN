@@ -6,12 +6,15 @@ import {
   TextField,
   Button,
   useTheme,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useProductStore } from "../store/product";
 
 function CreatePage() {
   const theme = useTheme();
+  const { createProduct } = useProductStore();
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -19,11 +22,28 @@ function CreatePage() {
     image: "",
   });
 
-  const {createProduct}=useProductStore()
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success", // ou "error"
+  });
+
+  const handleCloseSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
+
   const handleAddProduct = async () => {
-  const {success,message} = await createProduct(newProduct)
-  console.log("Success:", success)
-  console.log("Message:", message)
+    const { success, message } = await createProduct(newProduct);
+
+    setSnackbar({
+      open: true,
+      message: message,
+      severity: success ? "success" : "error",
+    });
+
+    if (success) {
+      setNewProduct({ name: "", price: "", image: "" });
+    }
   };
 
   return (
@@ -94,6 +114,23 @@ function CreatePage() {
           </Stack>
         </Box>
       </Stack>
+
+      {/* Snackbar para feedback */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
